@@ -19,7 +19,7 @@ export async function createPresignedUrl(attachmentId: string): Promise<string> 
     const presignedUrl = s3.getSignedUrl('putObject', {
         Bucket: s3_bucket,
         Key: attachmentId,
-        Expires: '60'  
+        Expires: 60 
     })
     logger.info(`Getted S3 SignedUrl for attachmentId ${attachmentId}.`)
     return presignedUrl

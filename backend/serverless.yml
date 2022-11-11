@@ -1,3 +1,5 @@
+org: thongnq2
+app: yes
 service: serverless-todo-app
 
 plugins:
@@ -5,6 +7,7 @@ plugins:
   - serverless-iam-roles-per-function
   - serverless-plugin-tracing
   - serverless-reqvalidator-plugin
+  - serverless-aws-documentation
 
 provider:
   name: aws
@@ -44,17 +47,17 @@ provider:
             - dynamodb:Query
           Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}/index/${self:provider.environment.TODOS_CREATED_AT_INDEX}
 
-  custom:
-    documentation:
-      api:
-        info:
-          version: v1.0.0
-          title: Udagram Todo app API
-          description: Serverless application for todo app
-      models:
-        - name: TodoRequest
-          contentType: application/json
-          schema: ${file(models/create-todo-model.json)}
+custom:
+  documentation:
+    api:
+      info:
+        version: v1.0.0
+        title: Udagram Todo app API
+        description: Serverless application for todo app
+    models:
+      - name: TodoRequest
+        contentType: application/json
+        schema: ${file(models/create-todo-model.json)}   
 
 functions:
 
